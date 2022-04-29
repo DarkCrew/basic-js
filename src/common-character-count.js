@@ -12,20 +12,34 @@ const { NotImplementedError } = require('../extensions/index.js');
  * Strings have 3 common characters - 2 "a"s and 1 "c".
  */
 function getCommonCharacterCount(s1, s2) {
-  let countUniqueLetters = '';
-  
-  for(let i = 0; i < s1.length; i++){
-    if(!(countUniqueLetters.includes(s1[i]))){
-      countUniqueLetters = countUniqueLetters.concat(s1[i]);
+  let coincidences1 = {};
+  let coincidences2 = {};
+  let sum = 0;
+
+  for (let i = 0; i < s1.length; i++){
+    if(coincidences1[s1[i]] === undefined){
+      coincidences1[s1[i]] = 1;
+    }else{
+      coincidences1[s1[i]] += 1;
     }
   }
-  for(let i = 0; i < s2.length; i++){
-    if(!(countUniqueLetters.includes(s2[i]))){
-      countUniqueLetters = countUniqueLetters.concat(s2[i]);
+
+  for (let i = 0; i < s2.length; i++){
+    if(coincidences2[s2[i]] === undefined){
+      coincidences2[s2[i]] = 1;
+    }else{
+      coincidences2[s2[i]] += 1;
     }
   }
-  
-  return countUniqueLetters.length;
+
+  for(let letter in coincidences1){
+    if(coincidences2[letter] != undefined){
+      sum += coincidences1[letter] > coincidences2[letter] ? coincidences2[letter] : coincidences1[letter];
+    }
+  }
+
+
+  return sum;
 }
 
 module.exports = {
