@@ -26,7 +26,8 @@ class VigenereCipheringMachine {
   }
 
   encrypt() {
-    if(this.machine)
+    throw new NotImplementedError('Not implemented');
+    // remove line with error and write your code here
   }
   decrypt() {
     throw new NotImplementedError('Not implemented');
